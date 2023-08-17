@@ -14,7 +14,7 @@ function handleSubmit (datos) {
 
   return (
     <div>
-      <h2>Formulario</h2>
+      <h2>-- Inscripción año 2024 --</h2>
       <Form onSubmit={handleSubmit} />
       {datos && (
         <div className="submitted-data">

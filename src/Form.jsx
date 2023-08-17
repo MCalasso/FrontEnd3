@@ -2,28 +2,31 @@ import { useState } from "react";
 
 
 const Form = (props) => {
-  //Aqui deberias agregar los estados y los handlers para los inputs
   const [nombre, setNombre] = useState('')
-  const [helado, setHelado] = useState('')
+  const [materia, setMateria] = useState('')
+  const [email, setEmail] = useState('')
   const [mensajeError, setMensajeError] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
     nombre.trimStart();
     if (nombre.length < 3) {
-      setMensajeError('Por favor chequea que la informacion sea correcta')
-    } else if (helado.length < 6) {
-      setMensajeError('Debe tener mas de 6 caracteres el helado')
+      setMensajeError('Por favor, chequea que la informacion ingresada sea correcta')
+    } else if (materia.length < 6) {
+      setMensajeError('Por favor, chequea que la informacion ingresada sea correcta')
+    } else if (email.length < 1) { 
+      setMensajeError('El campo E-mail no puede estar vacío')
     } else {
-      props.onSubmit({ nombre, helado })
+      props.onSubmit({ nombre, materia, email })
       setNombre('')
-      setHelado('')
+      setMateria('')
+      setEmail('')
       setMensajeError('')
     }
   }
           return (
             <div>
-              <h1>Elige tu helado favorito</h1>
+              <h1>Ingresa los datos del alumno</h1>
               <form onSubmit={handleSubmit}>
                 <label>
                   Nombre:
@@ -35,15 +38,24 @@ const Form = (props) => {
                 </label>
                 <br />
                 <label>
-                  Helado favorito:
+                  Materia:
                   <input
                     type='text'
-                    value={helado}
-                    onChange={(event) => setHelado(event.target.value)}
+                    value={materia}
+                    onChange={(event) => setMateria(event.target.value)}
                   />
                 </label>
                 <br />
-                <button type='submit'>Submit</button>
+                <label>
+                  E-mail:
+                  <input
+                    type='text'
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </label>
+                <br />
+                <button class='button' type='submit'>Registrarse</button>
               </form>
               {mensajeError && <p>{mensajeError}</p>}
             </div>
